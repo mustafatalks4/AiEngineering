@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Content & AI Engineering Masterclass | Premium Access</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter & Lexend -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Lexend:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #080808;
+            color: #f3f4f6;
+            overflow-x: hidden;
+        }
+        h1, h2, h3, .font-lexend {
+            font-family: 'Lexend', sans-serif;
+        }
+        .glass {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .accent-blue { color: #3b82f6; }
+        .bg-accent-blue { background-color: #3b82f6; }
+        .accent-gold { color: #fbbf24; }
+        
+        .glow-blue {
+            box-shadow: 0 0 25px rgba(59, 130, 246, 0.4);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .animate-float {
+            animation: float 5s ease-in-out infinite;
+        }
+
+        /* Responsive Fixes */
+        @media (max-width: 640px) {
+            h1 { font-size: 2.25rem !important; line-height: 1.2 !important; }
+            .hero-container { padding-top: 6rem; padding-bottom: 4rem; }
+            section { padding-top: 4rem !important; padding-bottom: 4rem !important; }
+            .framework-card, .prompt-card { padding: 1.5rem !important; }
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #080808; }
+        ::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 10px; }
+
+        #backToTop {
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+        }
+        #backToTop.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .prompt-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .prompt-card:hover {
+            border-color: rgba(59, 130, 246, 0.5);
+            background: rgba(59, 130, 246, 0.05);
+            transform: translateY(-5px);
+        }
+        
+        .framework-card:hover .framework-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+    </style>
+</head>
+<body class="selection:bg-blue-500/30">
+
+    <!-- Sticky Header -->
+    <header class="fixed top-0 w-full z-50 glass border-b border-white/5 py-3 px-4 md:px-12 flex justify-between items-center transition-all duration-300">
+        <div class="flex items-center space-x-2">
+            <div class="w-8 h-8 bg-accent-blue rounded flex items-center justify-center animate-pulse">
+                <i data-lucide="cpu" class="text-white w-4 h-4 md:w-5 md:h-5"></i>
+            </div>
+            <span class="font-lexend font-bold text-base md:text-xl tracking-tighter uppercase">AI<span class="accent-blue">Engineering</span></span>
+        </div>
+        <nav class="hidden lg:flex space-x-8 text-sm font-medium text-gray-400">
+            <a href="#basics" class="hover:text-white transition-colors">Basics</a>
+            <a href="#framework" class="hover:text-white transition-colors">Framework</a>
+            <a href="#syllabus" class="hover:text-white transition-colors">9 Pillars</a>
+            <a href="#pricing" class="hover:text-white transition-colors">Pricing</a>
+        </nav>
+        <button onclick="openModal()" class="bg-accent-blue hover:bg-blue-600 text-white px-4 py-1.5 md:px-6 md:py-2.5 rounded-full text-[10px] md:text-sm font-bold transition-all transform hover:scale-105 active:scale-95 glow-blue">
+            Join Elite
+        </button>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center hero-container px-6 overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <div class="absolute top-1/4 left-1/4 w-64 md:w-96 h-64 md:h-96 bg-blue-900/10 rounded-full blur-[80px] animate-pulse"></div>
+            <div class="absolute bottom-1/4 right-1/4 w-64 md:w-96 h-64 md:h-96 bg-amber-900/10 rounded-full blur-[80px] animate-pulse" style="animation-delay: 2s"></div>
+        </div>
+
+        <div class="relative z-10 text-center max-w-5xl" style="animation: fadeInUp 1s ease-out">
+            <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full glass border-gold/30 mb-6 animate-float">
+                <i data-lucide="video" class="accent-gold w-3 h-3 md:w-4 md:h-4"></i>
+                <span class="text-[9px] md:text-xs font-bold uppercase tracking-widest accent-gold">3 Live Sessions on Google Meet</span>
+            </div>
+            
+            <h1 class="text-3xl md:text-8xl font-bold mb-4 md:mb-6 tracking-tight leading-tight text-balance">
+                The Content & AI <br/>
+                <span class="accent-blue">Engineering</span> Masterclass
+            </h1>
+            
+            <p class="text-gray-400 text-sm md:text-xl max-w-2xl mx-auto mb-8 md:mb-10 leading-relaxed px-2">
+                Unlock the architect's mindset. From basic prompting to God-Mode System prompts. Master the invisible logic of viral growth.
+            </p>
+
+            <div class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-8">
+                <button onclick="openModal()" class="w-full md:w-auto px-8 py-3.5 bg-white text-black font-bold rounded-xl hover:shadow-[0_0_25px_rgba(255,255,255,0.15)] transition-all flex items-center justify-center group text-sm md:text-base">
+                    Enroll Now
+                    <i data-lucide="arrow-right" class="ml-2 w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform"></i>
+                </button>
+                <div class="text-[11px] md:text-sm font-medium text-gray-500">
+                    <span class="accent-gold font-bold">Premium Access Only</span> 
+                    <span class="mx-2">•</span>
+                    <span>No Discounts</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Basics Section -->
+    <section id="basics" class="py-16 px-6 border-y border-white/5 bg-[#090909]">
+        <div class="max-w-4xl mx-auto text-center reveal">
+            <h2 class="text-2xl md:text-4xl font-bold mb-8 text-white px-2 text-balance leading-snug">Even if you know <span class="accent-blue">Nothing</span>, <br class="sm:hidden"> We start from the <span class="accent-gold">Roots</span>.</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 text-left">
+                <div class="p-6 md:p-8 glass rounded-2xl md:rounded-3xl border-l-4 border-l-blue-500 hover:bg-white/[0.04] transition-colors">
+                    <h3 class="text-lg md:text-xl font-bold mb-2 md:mb-4">What is Prompting?</h3>
+                    <p class="text-gray-400 text-xs md:text-sm leading-relaxed">Most people "chat" with AI. We "engineer" AI. Speak the language of LLMs to get exact results, every single time.</p>
+                </div>
+                <div class="p-6 md:p-8 glass rounded-2xl md:rounded-3xl border-l-4 border-l-amber-500 hover:bg-white/[0.04] transition-colors">
+                    <h3 class="text-lg md:text-xl font-bold mb-2 md:mb-4">The Niche Backend</h3>
+                    <p class="text-gray-400 text-xs md:text-sm leading-relaxed">Before we write, we architect. Set up the background logic so AI works as your specialized employee.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Niche Breakdown Framework Section -->
+    <section id="framework" class="py-24 px-6 bg-[#080808]">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-3xl md:text-5xl font-bold mb-4 leading-tight">The Niche Breakdown <span class="accent-blue">Framework</span></h2>
+                <p class="text-gray-400 text-xs md:text-base">Deconstruct any high-performing niche into actionable engineering prompts using the "Niche" method.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 relative">
+                <div class="hidden lg:block absolute top-1/2 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-blue-500/20 to-transparent -z-10"></div>
+
+                <div class="framework-card glass p-8 rounded-3xl border border-white/5 reveal group">
+                    <div class="framework-icon mb-6 inline-block p-4 bg-blue-500/10 rounded-2xl group-hover:rotate-6 transition-transform">
+                        <i data-lucide="utensils" class="accent-blue w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">The Dish</h3>
+                    <p class="text-sm text-gray-400">Select any complex piece of viral content or raw niche data.</p>
+                </div>
+
+                <div class="framework-card glass p-8 rounded-3xl border border-white/5 reveal group" style="transition-delay: 0.1s">
+                    <div class="framework-icon mb-6 inline-block p-4 bg-blue-500/10 rounded-2xl group-hover:rotate-6 transition-transform">
+                        <i data-lucide="binary" class="accent-blue w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Deconstruction</h3>
+                    <p class="text-sm text-gray-400">Identify patterns, tone, logic, and hooks that make it work.</p>
+                </div>
+
+                <div class="framework-card glass p-8 rounded-3xl border border-white/5 reveal group" style="transition-delay: 0.2s">
+                    <div class="framework-icon mb-6 inline-block p-4 bg-blue-500/10 rounded-2xl group-hover:rotate-6 transition-transform">
+                        <i data-lucide="terminal" class="accent-blue w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Prompt Injection</h3>
+                    <p class="text-sm text-gray-400">Turn patterns into reusable high-performance Prompt Architectures.</p>
+                </div>
+
+                <div class="framework-card glass p-8 rounded-3xl border border-blue-500/20 bg-blue-500/[0.03] reveal group shadow-lg shadow-blue-500/5" style="transition-delay: 0.3s">
+                    <div class="framework-icon mb-6 inline-block p-4 bg-accent-blue rounded-2xl group-hover:scale-110 transition-transform">
+                        <i data-lucide="sparkles" class="text-white w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Masterpiece</h3>
+                    <p class="text-sm text-gray-400">Rebuild the masterpiece using your custom God-Mode GPT tools.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Syllabus Section: 9 Prompt Types -->
+    <section id="syllabus" class="py-16 px-6 bg-[#0a0a0a]">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12 reveal">
+                <h2 class="text-3xl md:text-5xl font-bold mb-4">The 9 Pillars of <span class="accent-blue">Prompting</span></h2>
+                <p class="text-gray-500 text-xs md:text-base">Mastering these is the only way to achieve "God-Mode" AI outputs.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Pillars 1-9 -->
+                <div class="prompt-card glass p-8 rounded-3xl border border-white/5 reveal">
+                    <i data-lucide="message-square" class="accent-blue w-6 h-6 mb-4"></i>
+                    <h3 class="text-lg font-bold mb-2">1. Basic Prompt</h3>
+                    <p class="text-[10px] text-gray-500 uppercase tracking-widest mb-4">The Foundation</p>
+                    <p class="text-sm text-gray-400">Simple inquiries. Direct questions. Learning how to define the core task clearly.</p>
+                </div>
+                <div class="prompt-card glass p-8 rounded-3xl border border-white/5 reveal">
+                    <i data-lucide="user-cog" class="accent-blue w-6 h-6 mb-4"></i>
+                    <h3 class="text-lg font-bold mb-2">2. Role Prompt</h3>
+                    <p class="text-[10px] text-gray-500 uppercase tracking-widest mb-4">Identity Engineering</p>
+                    <p class="text-sm text-gray-400">Persona-based logic. Defining identity, tone, and specific experience levels.</p>
+                </div>
+                <div class="prompt-card glass p-8 rounded-3xl border border-white/5 reveal">
+                    <i data-lucide="list-checks" class="accent-blue w-6 h-6 mb-4"></i>
+                    <h3 class="text-lg font-bold mb-2">3. Instruction Prompt</h3>
+                    <p class="text-[10px] text-gray-500 uppercase tracking-widest mb-4">Command Control</p>
+                    <p class="text-sm text-gray-400">Command-driven. Specific verbs, constraints, and negative prompts.</p>
+                </div>
+                <div class="prompt-card glass p-8 rounded-3xl border border-white/5 reveal">
+                    <i data-lucide="database" class="accent-blue w-6 h-6 mb-4"></i>
+                    <h3 class="text-lg font-bold mb-2">4. Context Prompt</h3>
+                    <p class="text-[10px] text-gray-500 uppercase tracking-widest mb-4">Background Intel</p>
+                    <p class="text-sm text-gray-400">Giving the AI the full "why" behind the task including audience and market data.</p>
+                </div>
+                <div class="prompt-card glass p-8 rounded-3xl border border-white/5 reveal">
+                    <i data-lucide="copy" class="accent-blue w-6 h-6 mb-4"></i>
+                    <h3 class="text-lg font-bold mb-2">5. Few-Shot Prompt</h3>
+                    <p class="text-[10px] text-gray-500 uppercase tracking-widest mb-4">Pattern Matching</p>
+                    <p class="text-sm text-gray-400">Input/Output examples for perfect style matching and complex logic replication.</p>
+                </div>
+                <div class="prompt-card glass p-8 rounded-3xl border border-white/5 reveal">
+                    <i data-lucide="brain-circuit" class="accent-blue w-6 h-6 mb-4"></i>
+                    <h3 class="text-lg font-bold mb-2">6. Chain-of-Thought</h3>
+                    <p class="text-[10px] text-gray-500 uppercase tracking-widest mb-4">Logical Reasoning</p>
+                    <p class="text-sm text-gray-400">"Think step-by-step." Forcing AI to build logic flows before final answers.</p>
+                </div>
+                <div class="prompt-card glass p-8 rounded-3xl border border-white/5 reveal">
+                    <i data-lucide="braces" class="accent-blue w-6 h-6 mb-4"></i>
+                    <h3 class="text-lg font-bold mb-2">7. Structured (JSON)</h3>
+                    <p class="text-[10px] text-gray-500 uppercase tracking-widest mb-4">Technical Output</p>
+                    <p class="text-sm text-gray-400">Defining keys/values for automated engineering and professional workflows.</p>
+                </div>
+                <div class="prompt-card glass p-8 rounded-3xl border border-white/5 reveal">
+                    <i data-lucide="timer" class="accent-blue w-6 h-6 mb-4"></i>
+                    <h3 class="text-lg font-bold mb-2">8. Timeline Prompt</h3>
+                    <p class="text-[10px] text-gray-500 uppercase tracking-widest mb-4">Sequential Milestones</p>
+                    <p class="text-sm text-gray-400">Managing sequential logic and dependencies for multi-stage content projects.</p>
+                </div>
+                <div class="prompt-card glass p-8 rounded-3xl border border-blue-500/30 bg-blue-500/5 reveal">
+                    <i data-lucide="crown" class="accent-gold w-6 h-6 mb-4"></i>
+                    <h3 class="text-lg font-bold mb-2">9. Master Prompt</h3>
+                    <p class="text-[10px] text-amber-500 uppercase tracking-widest font-black mb-4">The "God Mode"</p>
+                    <p class="text-sm text-gray-400">Ultimate set of permanent rules for fully automated AI behavior and control.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- God Mode Niche Practical Bonus Section -->
+    <section class="py-24 px-6 bg-gradient-to-b from-[#0a0a0a] to-[#080808]">
+        <div class="max-w-7xl mx-auto">
+            <div class="glass p-8 md:p-16 rounded-[40px] border border-blue-500/20 relative overflow-hidden reveal text-balance">
+                <div class="absolute -top-10 -right-10 w-40 h-40 bg-blue-500/10 rounded-full blur-3xl"></div>
+                
+                <div class="max-w-3xl relative z-10">
+                    <div class="bg-accent-blue text-white text-[10px] font-black px-4 py-1.5 rounded-full inline-block mb-6 shadow-xl">GOD MODE UNLOCKED</div>
+                    <h2 class="text-3xl md:text-6xl font-bold mb-6 italic leading-tight">The <span class="accent-blue">"Niche"</span> <br class="md:hidden"> Practical Bonus</h2>
+                    <p class="text-gray-400 text-sm md:text-lg mb-8 leading-relaxed">
+                        After mastering the pillars, we move into dominance. You get my personal, high-conversion <span class="text-white font-bold">"Niche Practical Prompts"</span>—built to break any niche on Earth.
+                    </p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-12">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-10 h-10 bg-blue-500/10 rounded-xl flex items-center justify-center shrink-0 animate-pulse"><i data-lucide="video" class="accent-blue w-5 h-5"></i></div>
+                            <div>
+                                <h4 class="font-bold text-sm">Visuals & Animation</h4>
+                                <p class="text-[11px] text-gray-500">A to Z prompts for motion graphics automation.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="w-10 h-10 bg-blue-500/10 rounded-xl flex items-center justify-center shrink-0"><i data-lucide="mic" class="accent-blue w-5 h-5"></i></div>
+                            <div>
+                                <h4 class="font-bold text-sm">Voice & Scripting</h4>
+                                <p class="text-[11px] text-gray-500">Expert storytelling triggers & automated scripts.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="w-10 h-10 bg-blue-500/10 rounded-xl flex items-center justify-center shrink-0"><i data-lucide="repeat" class="accent-blue w-5 h-5"></i></div>
+                            <div>
+                                <h4 class="font-bold text-sm">Automated Repurposing</h4>
+                                <p class="text-[11px] text-gray-500">Repurpose viral content for your accounts instantly.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="w-10 h-10 bg-blue-500/10 rounded-xl flex items-center justify-center shrink-0"><i data-lucide="zap" class="accent-blue w-5 h-5"></i></div>
+                            <div>
+                                <h4 class="font-bold text-sm">Expert Automation</h4>
+                                <p class="text-[11px] text-gray-500">Turn raw work into expert-level automated systems.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rules Section -->
+    <section class="py-16 px-6 bg-[#080808]">
+        <div class="max-w-3xl mx-auto reveal glass border-l-4 border-l-red-500 p-6 md:p-10 rounded-2xl">
+            <h2 class="text-lg md:text-2xl font-bold mb-6 text-white flex items-center">
+                <i data-lucide="shield-alert" class="w-5 h-5 md:w-6 md:h-6 mr-3 text-red-500"></i>
+                The Enrollment Commitment
+            </h2>
+            <ul class="space-y-4 text-xs md:text-sm text-gray-400">
+                <li class="flex items-start">
+                    <span class="w-1.5 h-1.5 bg-red-500 rounded-full mt-1.5 mr-3 shrink-0"></span>
+                    <span><strong>Strictly NO Recordings:</strong> These are live intensive sessions. Attendance is mandatory.</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="w-1.5 h-1.5 bg-red-500 rounded-full mt-1.5 mr-3 shrink-0"></span>
+                    <span><strong>Anti-Leak Policy:</strong> The data and frameworks are proprietary. Sharing content results in a permanent ban.</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="w-1.5 h-1.5 bg-red-500 rounded-full mt-1.5 mr-3 shrink-0"></span>
+                    <span><strong>No Refunds:</strong> We maintain a non-refundable seat policy once enrolled.</span>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-16 px-6 border-t border-white/5 bg-[#080808]">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-2xl md:text-4xl font-bold mb-16 reveal text-balance leading-tight">Invest in Your <span class="accent-blue">Engineering</span> Future</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- International -->
+                <div class="reveal glass p-8 md:p-10 rounded-[2rem] border border-white/10 flex flex-col items-center">
+                    <div class="text-[9px] font-black tracking-[4px] text-gray-500 mb-6 uppercase">International</div>
+                    <div class="text-5xl md:text-6xl font-bold mb-2">$25<span class="text-sm text-gray-500 font-normal"> USD</span></div>
+                    <div class="text-blue-500 font-bold text-[10px] uppercase tracking-tighter mb-10 italic">Binance Accepted</div>
+                    <ul class="w-full text-left space-y-3 mb-12 text-xs md:text-sm text-gray-400">
+                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 mr-3 text-blue-500 shrink-0"></i> Full Niche Breakdown access</li>
+                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 mr-3 text-blue-500 shrink-0"></i> 9 Pillars & Nash Practical Prompts</li>
+                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 mr-3 text-blue-500 shrink-0"></i> Live Meet Sessions access</li>
+                    </ul>
+                    <button onclick="openModal()" class="w-full py-4 bg-white text-black font-black rounded-2xl hover:bg-gray-200 transition-all active:scale-95 text-sm uppercase tracking-widest">Claim Now</button>
+                </div>
+
+                <!-- Pakistan -->
+                <div class="reveal glass p-8 md:p-10 rounded-[2rem] border-2 border-blue-500 shadow-2xl shadow-blue-500/10 flex flex-col items-center relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-blue-500 text-white text-[8px] font-black px-3 py-1.5 rounded-bl-xl uppercase tracking-widest">Asia Special</div>
+                    <div class="text-[9px] font-black tracking-[4px] text-blue-500 mb-6 uppercase">Pakistan / Local</div>
+                    <div class="text-5xl md:text-6xl font-bold mb-2">5,000<span class="text-sm text-gray-500 font-normal"> PKR</span></div>
+                    <div class="text-blue-500 font-bold text-[10px] uppercase tracking-tighter mb-10 italic">Value Contact via WhatsApp</div>
+                    <ul class="w-full text-left space-y-3 mb-12 text-xs md:text-sm text-gray-400">
+                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 mr-3 text-blue-500 shrink-0"></i> Bank / EasyPaisa / JazzCash</li>
+                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 mr-3 text-blue-500 shrink-0"></i> Same Premium Content access</li>
+                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 mr-3 text-blue-500 shrink-0"></i> Direct Support Channel</li>
+                    </ul>
+                    <button onclick="openModal()" class="w-full py-4 bg-accent-blue text-white font-black rounded-2xl hover:bg-blue-600 transition-all active:scale-95 glow-blue text-sm uppercase tracking-widest">Claim Now</button>
+                </div>
+            </div>
+            <p class="mt-8 text-[10px] text-gray-500 uppercase tracking-widest font-bold">* One Table is Non-Refundable</p>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="py-16 px-6 border-t border-white/5 bg-[#070707]">
+        <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-6 md:gap-16 reveal">
+            <div class="w-36 h-36 md:w-64 md:h-64 rounded-3xl glass border border-white/10 overflow-hidden shrink-0 relative group">
+                <img src="https://i.ibb.co/4RCg2cPf/upscaled-image-1770489226602.png" alt="Mustafa" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700">
+                <div class="absolute bottom-2 left-0 w-full text-center">
+                    <span class="text-[7px] font-black text-white/50 uppercase tracking-[2px]">Mustafa Talks</span>
+                </div>
+            </div>
+            <div class="text-center md:text-left">
+                <h3 class="text-xl md:text-3xl font-bold mb-4">Meet Your Mentor: <span class="accent-blue">Mustafa</span></h3>
+                <p class="text-gray-400 text-xs md:text-base leading-relaxed mb-6 max-w-lg mx-auto md:mx-0">
+                    I am a Content Creator dedicated to deconstructing high-performance content. I provide secrets for free, but this Masterclass is for those ready to architect their own niche dominance.
+                </p>
+                <a href="https://facebook.com/themustafatalks" target="_blank" class="inline-flex items-center px-6 py-3 glass rounded-xl text-[10px] md:text-xs font-bold hover:bg-white/5 transition-all">
+                    <i data-lucide="facebook" class="w-4 h-4 mr-2 text-blue-500"></i>
+                    Follow themustafatalks
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="py-16 md:py-24 px-6 text-center reveal">
+        <h2 class="text-3xl md:text-5xl font-bold mb-6 italic leading-tight text-balance text-white">Result Granted <br class="sm:hidden"> with Struggle.</h2>
+        <p class="text-gray-500 max-w-xl mx-auto mb-10 text-[10px] md:text-sm px-2 leading-relaxed">
+            This is an opportunity to learn. It depends on you. No one forces you—the results require your commitment. Insha Allah, you will see the impact of engineering over simple chatting.
+        </p>
+        <div class="flex items-center justify-center space-x-2 md:space-x-4">
+            <div class="h-[1px] w-8 md:w-16 bg-white/10"></div>
+            <div class="text-[8px] md:text-[10px] text-gray-500 uppercase tracking-[4px] font-black">2025 MASTERCLASS BY MUSTAFA TALKS</div>
+            <div class="h-[1px] w-8 md:w-16 bg-white/10"></div>
+        </div>
+    </section>
+
+    <!-- Back to Top -->
+    <button id="backToTop" class="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-50 p-3 bg-accent-blue text-white rounded-xl shadow-2xl hover:scale-110 transition-all">
+        <i data-lucide="chevron-up" class="w-5 h-5"></i>
+    </button>
+
+    <!-- Enrollment Modal -->
+    <div id="enrollModal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-black/95 backdrop-blur-xl">
+        <div class="glass w-full max-w-lg rounded-3xl overflow-hidden shadow-2xl border border-white/10 transform transition-all scale-95 opacity-0 duration-300" id="modalContent">
+            <div class="relative p-6 md:p-10">
+                <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-500 hover:text-white transition-colors">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+
+                <div class="text-center mb-8">
+                    <h3 class="text-xl md:text-2xl font-bold mb-4">Insha Allah, your transformation starts here.</h3>
+                    <div class="bg-amber-500/10 border border-amber-500/20 text-amber-500 text-[8px] py-1.5 px-4 rounded-full inline-block font-black uppercase tracking-widest">
+                        ⚠️ WARNING: NO SPAM. AGREE TO ALL TERMS.
+                    </div>
+                </div>
+
+                <form id="enrollForm" class="space-y-4">
+                    <div class="space-y-1">
+                        <label class="block text-[8px] font-black text-gray-500 uppercase tracking-widest ml-1">Full Name</label>
+                        <input type="text" id="formName" required class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-all text-xs" placeholder="Your name">
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="space-y-1">
+                            <label class="block text-[8px] font-black text-gray-500 uppercase tracking-widest ml-1">Email</label>
+                            <input type="email" id="formEmail" required class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-all text-xs" placeholder="email@example.com">
+                        </div>
+                        <div class="space-y-1">
+                            <label class="block text-[8px] font-black text-gray-500 uppercase tracking-widest ml-1">WhatsApp</label>
+                            <input type="tel" id="formWa" required class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-all text-xs" placeholder="+92XXXXXXXXXX">
+                        </div>
+                    </div>
+                    <div class="space-y-1">
+                        <label class="block text-[8px] font-black text-gray-500 uppercase tracking-widest ml-1">Your Niche & Goals</label>
+                        <textarea id="formReason" required rows="3" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-all text-xs resize-none" placeholder="What are you building?"></textarea>
+                    </div>
+
+                    <div class="bg-white/5 p-3 rounded-lg text-[8px] text-gray-500 italic">
+                        By submitting, I agree there are NO recordings, NO refunds, and I will NOT leak proprietary data.
+                    </div>
+
+                    <button type="submit" class="w-full py-4 bg-accent-blue hover:bg-blue-600 text-white font-black rounded-xl transition-all glow-blue uppercase tracking-widest text-[9px]">
+                        Finalize & Claim Now
+                    </button>
+                </form>
+
+                <div id="successMessage" class="hidden text-center py-8">
+                    <div class="w-12 h-12 bg-blue-500/20 text-blue-500 rounded-full flex items-center justify-center mx-auto mb-4 animate-spin">
+                        <i data-lucide="refresh-cw" class="w-6 h-6"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-2 uppercase italic tracking-tighter text-white">Redirecting...</h4>
+                    <p class="text-gray-400 text-xs">Opening WhatsApp to connect with Mustafa.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        // Scroll Reveal
+        const reveal = () => {
+            const reveals = document.querySelectorAll('.reveal');
+            reveals.forEach(el => {
+                const windowHeight = window.innerHeight;
+                const elementTop = el.getBoundingClientRect().top;
+                const elementVisible = 80;
+                if (elementTop < windowHeight - elementVisible) {
+                    el.classList.add('active');
+                }
+            });
+        };
+        window.addEventListener('scroll', reveal);
+        reveal();
+
+        // Modal Logic
+        const modal = document.getElementById('enrollModal');
+        const modalContent = document.getElementById('modalContent');
+        const enrollForm = document.getElementById('enrollForm');
+        const successMessage = document.getElementById('successMessage');
+
+        function openModal() {
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+            setTimeout(() => {
+                modalContent.classList.remove('scale-95', 'opacity-0');
+                modalContent.classList.add('scale-100', 'opacity-100');
+            }, 10);
+        }
+
+        function closeModal() {
+            modalContent.classList.remove('scale-100', 'opacity-100');
+            modalContent.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                modal.classList.remove('flex');
+                modal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+                enrollForm.classList.remove('hidden');
+                successMessage.classList.add('hidden');
+            }, 300);
+        }
+
+        modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+
+        // WhatsApp Redirection with Custom Message
+        enrollForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const name = document.getElementById('formName').value;
+            const email = document.getElementById('formEmail').value;
+            const wa = document.getElementById('formWa').value;
+            const reason = document.getElementById('formReason').value;
+
+            enrollForm.classList.add('hidden');
+            successMessage.classList.remove('hidden');
+
+            const whatsappNumber = "923291731821"; 
+            
+            // AUTOMATIC MESSAGE CONSTRUCTION WITH BOLD NAME
+            const text = `Assalamu Alaikum Mustafa Bhai!\n\nI am coming from your AI Engineering Website.\nMy name is: *${name}*\n\nI want to CLAIM my spot in the Masterclass.\nDetails:\n- Email: ${email}\n- WhatsApp: ${wa}\n- Niche/Goals: ${reason}\n\nI AGREE to the NO Recordings and NO Data Leak policy. I am ready to pay the enrollment fee ($25 / 5000 PKR). Please share the payment details so I can enroll immediately.\n\nJazakAllah!`;
+            
+            const encodedText = encodeURIComponent(text);
+            const waLink = `https://wa.me/${whatsappNumber}?text=${encodedText}`;
+
+            setTimeout(() => {
+                window.location.href = waLink;
+            }, 1800);
+        });
+
+        // Back to top
+        const backToTop = document.getElementById('backToTop');
+        const header = document.querySelector('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('bg-black/95', 'py-2');
+            } else {
+                header.classList.remove('bg-black/95', 'py-2');
+            }
+            if (window.scrollY > 400) { backToTop.classList.add('show'); } 
+            else { backToTop.classList.remove('show'); }
+        });
+        backToTop.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+    </script>
+</body>
+</html>
